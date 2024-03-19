@@ -21,7 +21,12 @@
             </div>
             <div class="summary-section">
                 <h2>Summary</h2>
-                <div id="summary-text">Your summary goes here.</div>
+                {% if summary%}
+                <div id="summary-text">{{summary}}</div>
+                {% else %}
+                <div id="summary-text">Your summary will be displayed here.</div>
+                {% endif %}
+
             </div>
         </div>
     </div>
