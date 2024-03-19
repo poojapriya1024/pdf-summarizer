@@ -24,7 +24,7 @@ def summarize(text):
     tokens = [token.text for token in doc]
     punctuation_symbols = punctuation + '\\n'
 
-    word_frequencies = {}
+    word_frequencies = {} 
     for word in doc:
         if word.text.lower() not in stopwords and word.text.lower() not in punctuation_symbols:
             word_frequencies[word.text] = word_frequencies.get(word.text, 0) + 1
@@ -44,7 +44,7 @@ def summarize(text):
     summary = nlargest(select_length, sentence_scores, key=sentence_scores.get)
     final_summary = [word.text for word in summary]
     summary = " ".join(final_summary)  # Join directly into a final summary
-    return summary
+    return render_template("index.html", summary = summary)
 
 @app.route("/")
 def index():
