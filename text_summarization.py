@@ -1,5 +1,4 @@
-#this file contains only the NLP part = text summarization
-
+#this file contains only the NLP part = extractive text summarization
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from string import punctuation
@@ -29,7 +28,6 @@ for word in doc:
             else:
                 word_frequencies[word.text] += 1
 
-
 max_frequency = max(word_frequencies.values())
 for word in word_frequencies.keys():
     word_frequencies[word] = word_frequencies[word] / max_frequency
@@ -47,14 +45,11 @@ for sent in sentence_tokens:
             else:
                 sentence_scores[sent] += word_frequencies[word.text.lower()]
                 
-
 #indicates how short we wish the summary to be
 select_length = int(len(sentence_tokens)*0.7) 
 #obtain the top most sentences that has high frequency score based on the select_length value
 summary = nlargest(select_length,sentence_scores,key = sentence_scores.get)
-
 final_summary = [word.text for word in summary]
 #join the contents of final_summary(list) to make a proper paragraph
 summary = "".join(final_summary)
-
 print(summary)
